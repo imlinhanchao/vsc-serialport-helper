@@ -18,8 +18,43 @@
 			{
 				"command": "serialport-helper.helloWorld",
 				"title": "Hello World"
+			},
+			{
+				"command": "serialport.refreshEntry",
+				"title": "Refresh",
+				"icon": {
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
 			}
-		]
+		],
+		"viewsContainers": {
+			"activitybar": [
+			  	{
+					"id": "serialport-view",
+					"title": "Serial Port View",
+					"icon": "media/serial-port.svg"
+				}
+			]
+		},
+		"views": {
+			"serialport-view": [
+			  {
+				"id": "serialport",
+				"name": "List",
+				"icon": "media/serial-port.svg"
+			  }
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "serialport.refreshEntry",
+					"when": "view == serialport",
+					"group": "navigation"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",

@@ -61,5 +61,6 @@ Added features X, Y, and Z.
 
 * [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+* [Serial Port Icon](https://iconscout.com/icons/serial-port) by [Microsoft](https://iconscout.com/contributors/fluent)
 
 **Enjoy!**
