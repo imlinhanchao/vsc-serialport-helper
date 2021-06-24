@@ -12,7 +12,7 @@
 	"activationEvents": [
 		"onCommand:serialport-helper.helloWorld"
 	],
-	"main": "./extension.js",
+	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -25,6 +25,14 @@
 				"icon": {
 					"light": "resources/light/refresh.svg",
 					"dark": "resources/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "serialport.editEntry",
+				"title": "Edit",
+				"icon": {
+					"light": "resources/light/edit.svg",
+					"dark": "resources/dark/edit.svg"
 				}
 			}
 		],
@@ -39,11 +47,11 @@
 		},
 		"views": {
 			"serialport-view": [
-			  {
-				"id": "serialport",
-				"name": "List",
-				"icon": "media/serial-port.svg"
-			  }
+				{
+					"id": "serialport",
+					"name": "List",
+					"icon": "media/serial-port.svg"
+				}
 			]
 		},
 		"menus": {
@@ -52,6 +60,13 @@
 					"command": "serialport.refreshEntry",
 					"when": "view == serialport",
 					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "serialport.editEntry",
+					"when": "view == serialport && viewItem == dependency",
+					"group": "inline"
 				}
 			]
 		}
