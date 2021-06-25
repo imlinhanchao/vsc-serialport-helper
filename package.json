@@ -38,7 +38,7 @@
 		],
 		"viewsContainers": {
 			"activitybar": [
-			  	{
+				{
 					"id": "serialport-view",
 					"title": "Serial Port View",
 					"icon": "media/serial-port.svg"
@@ -65,7 +65,7 @@
 			"view/item/context": [
 				{
 					"command": "serialport.editEntry",
-					"when": "view == serialport && viewItem == dependency",
+					"when": "view == serialport && viewItem == serialport-item",
 					"group": "inline"
 				}
 			]
@@ -88,6 +88,6 @@
 		"vscode-test": "^1.5.2"
 	},
 	"dependencies": {
-		"serialport": "^9.2.0"
+		"node-usb-native": "^0.0.20"
 	}
 }
