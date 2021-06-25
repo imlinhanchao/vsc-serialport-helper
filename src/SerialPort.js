@@ -7,6 +7,7 @@ class SerialPortProvider {
 	constructor() {
 		this._onDidChangeTreeData = new vscode.EventEmitter();
 		this.refreshPort();
+		this.ports = [];
 	}
 
 	get onDidChangeTreeData() {
@@ -14,10 +15,14 @@ class SerialPortProvider {
 	}
 
 	async refreshPort() {
-		let port = await SerialPort.search();
-		this.ports = port.map(p => new SerialPortItem(p, vscode.TreeItemCollapsibleState.None, () => {
+		let ports = await SerialPort.search();
+		let paths = this.ports.map(p => p.path);
+		let portNew = ports.filter(p => paths.indexOf(p.path) < 0);
+		paths = ports.map(p => p.path);
+		this.ports = this.ports.filter(p => paths.indexOf(p.path) >= 0);
+		this.ports = this.ports.concat(portNew.map(p => new SerialPortItem(p, vscode.TreeItemCollapsibleState.None, () => {
 			this._onDidChangeTreeData.fire();
-		}))
+		})))
 	}
 
 	refresh() {
@@ -55,13 +60,46 @@ class SerialPortItem extends vscode.TreeItem {
         this.command= {
 			command: 'serialport.connectOrDisconect',
 			title: '',
-			arguments: [this.port]
+			arguments: [this]
 		};
 		this.info = port;
 		this.changeEvent = changeEvent;
-		this.port.onChange(() => {
+		this.port.onChange((isOpen) => {
 			this.changeEvent();
-		})
+			if (isOpen) this.showChannel();
+		});
+		this.port.onListen((err, data) => {
+			if(!err) this.outputData(data);
+			else vscode.window.showErrorMessage(`Serial Port [${port.path}] get some error: ${err.message}`)
+		});
+	}
+
+	outputData(data) {
+		if (!this.port.isOpen) return;
+		this.outputChannel.append(data.toString());
+	}
+
+	open() {
+		this.outputChannel = vscode.window.createOutputChannel(`Serial Port [${this.path}]`);
+		return this.port.open();
+	}
+
+	close() {
+		this.outputChannel.clear();
+		this.outputChannel.dispose();
+		return this.port.close();
+	}
+
+	get isOpen() {
+		return this.port.isOpen;
+	}
+
+	get path() {
+		return this.info.path;
+	}
+
+	showChannel() {
+		this.outputChannel.show(true);
 	}
 
 	get tooltip() {
