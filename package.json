@@ -10,13 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:serialport-helper.helloWorld"
+		"onCommand:serialport.helloWorld",
+		"onView:serialport"
 	],
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "serialport-helper.helloWorld",
+				"command": "serialport.helloWorld",
 				"title": "Hello World"
 			},
 			{

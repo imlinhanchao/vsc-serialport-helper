@@ -4,17 +4,24 @@ const path = require('path');
 
 
 class SerialPortProvider {
-
-
 	constructor() {
 		this._onDidChangeTreeData = new vscode.EventEmitter();
+		this.refreshPort();
 	}
 
 	get onDidChangeTreeData() {
 		return this._onDidChangeTreeData.event
 	}
 
+	async refreshPort() {
+		let port = await SerialPort.search();
+		this.ports = port.map(p => new SerialPortItem(p, vscode.TreeItemCollapsibleState.None, () => {
+			this._onDidChangeTreeData.fire();
+		}))
+	}
+
 	refresh() {
+		this.refreshPort();
 		this._onDidChangeTreeData.fire();
 	}
 
@@ -22,51 +29,54 @@ class SerialPortProvider {
 		return element;
 	}
 
-	getParent(element) {
-		return null;
-	}
-
 	async getChildren(element) {
 		if (!element) {
 			return await this.getSerialPortList();
 		} else {
 			console.dir(element);
-			return null;
+			return [];
 		}
 
 	}
 
 	async getSerialPortList() {
-		let port = await SerialPort.search();
-		return port.map(p => new SerialPortItem(p.path, vscode.TreeItemCollapsibleState.Collapsed))
+		return this.ports;
 	}
 }
 class SerialPortItem extends vscode.TreeItem {
-
 	constructor(
-		label,
+		port,
 		collapsibleState,
-		command
+		changeEvent
 	) {
-		super(label, collapsibleState);
-        this.port = new SerialPort(label);
+		super(port.path, collapsibleState);
+        this.port = new SerialPort(port.path);
         this.contextValue = 'serialport-item';
-        this.command= command;
+        this.command= {
+			command: 'serialport.connectOrDisconect',
+			title: '',
+			arguments: [this.port]
+		};
+		this.info = port;
+		this.changeEvent = changeEvent;
+		this.port.onChange(() => {
+			this.changeEvent();
+		})
 	}
 
 	get tooltip() {
-		return `${this.label}(${this.port.open ? 'connected' : 'disconected'})`;
+		return `VID:  ${this.info.vendorId}
+PID:  ${this.info.productId}
+Manufacturer: ${this.info.manufacturer}
+SerialNumber: ${this.info.serialNumber}`;
 	}
 
 	get description() {
-		return this.version;
+		return `[${this.port.isOpen ? 'Connected' : 'Disconected'}]`;
 	}
 
 	get iconPath() {
-        return {
-            light: path.join(__filename, '..', '..', 'resources', 'light', this.port.open ? 'link.svg' : 'unlink.svg'),
-            dark: path.join(__filename, '..', '..', 'resources', 'dark', this.port.open ? 'link.svg' : 'unlink.svg')
-        };
+        return path.join(__filename, '..', '..', 'resources', this.port.isOpen ? 'link.svg' : 'unlink.svg');
     }
 }
 
