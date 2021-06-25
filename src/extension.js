@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode');
 const { SerialPortProvider } = require('./SerialPort');
+const command = require('./comment');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -25,19 +26,11 @@ function activate(context) {
 		vscode.window.showInformationMessage('Hello World from SerialPort-Helper!');
 	}));
 
-	context.subscriptions.push(vscode.commands.registerCommand('serialport.connectOrDisconect', function (port) {
-		// The code you place here will be executed every time your command is executed
-		let ret = false;
-		if (port.isOpen) ret = port.close();
-		else ret = port.open();
-
-		// Display a message box to the user
-		if(ret) vscode.window.showInformationMessage(`${port.path} was ${port.isOpen ? 'Connected' : 'Disconnected'}.`);
-		else  vscode.window.showErrorMessage(`${port.path} ${!port.isOpen ? 'Connect' : 'Disconnect'} was failed. Error Message: ${port.lasterror}`);
-	}));
+	context.subscriptions.push(vscode.commands.registerCommand('serialport.connectOrDisconect', command.connectOrDisconect));
 
 	const SerialPortsProvider = new SerialPortProvider();
 	vscode.window.registerTreeDataProvider('serialport', SerialPortsProvider);
+	vscode.commands.registerCommand('serialport.refreshEntry', () => SerialPortsProvider.refresh());
 
 
 }

@@ -68,11 +68,12 @@ class SerialPortItem extends vscode.TreeItem {
 		return `VID:  ${this.info.vendorId}
 PID:  ${this.info.productId}
 Manufacturer: ${this.info.manufacturer}
-SerialNumber: ${this.info.serialNumber}`;
+SerialNumber: ${this.info.serialNumber}
+* Click to ${this.port.isOpen ? 'Disconnect' : 'Connect'}`;
 	}
 
 	get description() {
-		return `[${this.port.isOpen ? 'Connected' : 'Disconected'}]`;
+		return `[${this.port.isOpen ? 'Connected' : 'Disconnected'}]`;
 	}
 
 	get iconPath() {
