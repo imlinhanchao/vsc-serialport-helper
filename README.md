@@ -15,7 +15,7 @@ You can connect any serial port used to read / write data.
 ## Release Notes
 ### 0.0.1
 
-First Version, only baise feature.
+- First Version, only baise feature.
 
 -----------------------------------------------------------------------------------------------------------
 ### For more information
