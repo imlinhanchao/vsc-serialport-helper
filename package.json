@@ -29,11 +29,11 @@
 				}
 			},
 			{
-				"command": "serialport.editEntry",
-				"title": "Edit",
+				"command": "serialport.sendEntry",
+				"title": "Send",
 				"icon": {
-					"light": "resources/light/edit.svg",
-					"dark": "resources/dark/edit.svg"
+					"light": "resources/light/send.svg",
+					"dark": "resources/dark/send.svg"
 				}
 			}
 		],
@@ -65,7 +65,7 @@
 			],
 			"view/item/context": [
 				{
-					"command": "serialport.editEntry",
+					"command": "serialport.sendEntry",
 					"when": "view == serialport && viewItem == serialport-item",
 					"group": "inline"
 				}
