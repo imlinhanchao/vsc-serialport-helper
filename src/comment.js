@@ -35,7 +35,7 @@ module.exports = {
 	async sendEntry(port) {
 		let data = await prompt(`Send String to ${port.path}`);
 		if (!data) return;
-		let ret = await port.port.send(data);
+		let ret = await port.port.send(data + '\n');
 		if (ret) vscode.window.showInformationMessage(`Send Data to ${port.path} was Success.`);
 		else vscode.window.showErrorMessage(`Send Data to ${port.path} was failed. Error Message: ${port.lasterror}`);
 	}
