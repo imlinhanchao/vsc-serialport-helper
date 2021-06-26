@@ -20,7 +20,7 @@ class SerialPortProvider {
 		let portNew = ports.filter(p => paths.indexOf(p.path) < 0);
 		paths = ports.map(p => p.path);
 		this.ports = this.ports.filter(p => paths.indexOf(p.path) >= 0);
-		this.ports = this.ports.concat(portNew.map(p => new SerialPortItem(p, vscode.TreeItemCollapsibleState.None, () => {
+		this.ports = this.ports.concat(portNew.map(p => new SerialPortItem(p, vscode.TreeItemCollapsibleState.Collapsed, () => {
 			this._onDidChangeTreeData.fire();
 		})))
 	}
@@ -39,7 +39,10 @@ class SerialPortProvider {
 			return await this.getSerialPortList();
 		} else {
 			console.dir(element);
-			return [];
+			return ['baudRate', 'dataBits', 'stopBits', 'parity'].map(a => new SerialPortAttr(element, a, 
+				vscode.TreeItemCollapsibleState.None, () => {
+				this._onDidChangeTreeData.fire();
+			}))
 		}
 
 	}
@@ -55,7 +58,7 @@ class SerialPortItem extends vscode.TreeItem {
 		changeEvent
 	) {
 		super(port.path, collapsibleState);
-        this.port = new SerialPort(port.path);
+        
         this.contextValue = 'serialport-item';
         this.command= {
 			command: 'serialport.connectOrDisconect',
@@ -64,6 +67,19 @@ class SerialPortItem extends vscode.TreeItem {
 		};
 		this.info = port;
 		this.changeEvent = changeEvent;
+		this.initPort(port.path, {
+			baudRate: 9600,
+			dataBits: 8,
+			stopBits: 1,
+			parity: 'none'
+		});
+	}
+
+	initPort(path, options) {
+		this.options = options;
+		let isOpen = this.port && this.port.isOpen;
+		if (isOpen) this.port.close();
+		this.port = new SerialPort(path, this.options);
 		this.port.onChange((isOpen) => {
 			this.changeEvent();
 			if (isOpen) this.showChannel();
@@ -72,6 +88,7 @@ class SerialPortItem extends vscode.TreeItem {
 			if(!err) this.outputData(data);
 			else vscode.window.showErrorMessage(`Serial Port [${port.path}] get some error: ${err.message}`)
 		});
+		if (isOpen) this.port.open();
 	}
 
 	outputData(data) {
@@ -88,6 +105,12 @@ class SerialPortItem extends vscode.TreeItem {
 		this.outputChannel.clear();
 		this.outputChannel.dispose();
 		return this.port.close();
+	}
+
+	async setting(options) {
+		this.initPort(this.port.path, Object.assign(this.options, options));
+		this.changeEvent();
+		return true;
 	}
 
 	get isOpen() {
@@ -116,6 +139,45 @@ SerialNumber: ${this.info.serialNumber}
 
 	get iconPath() {
         return path.join(__filename, '..', '..', 'resources', this.port.isOpen ? 'link.svg' : 'unlink.svg');
+    }
+
+	get lasterror() {
+		return this.port.lasterror.message;
+	}
+}
+
+class SerialPortAttr extends vscode.TreeItem {
+	constructor(
+		port,
+		attr,
+		collapsibleState,
+		changeEvent
+	) {
+		super(attr, collapsibleState);
+        this.contextValue = 'serialport-attr';
+        this.command= {
+			command: 'serialport.updateEntry',
+			title: '',
+			arguments: [port, attr]
+		};
+		this.attr = attr;
+		this.port = port;
+		this.changeEvent = changeEvent;
+	}
+
+	get tooltip() {
+		return `Click to Update`;
+	}
+
+	get description() {
+		return this.port.options[this.attr].toString();
+	}
+
+	get iconPath() {
+        return {
+			light: path.join(__filename, '..', '..', 'resources', 'light', 'setting.svg'),
+			dark: path.join(__filename, '..', '..', 'resources', 'dark', 'setting.svg')
+		};
     }
 }
 

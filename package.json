@@ -13,6 +13,7 @@
 		"onCommand:serialport.helloWorld",
 		"onView:serialport"
 	],
+    "icon": "media/main.svg",
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [

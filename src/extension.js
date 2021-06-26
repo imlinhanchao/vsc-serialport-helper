@@ -28,6 +28,7 @@ function activate(context) {
 
 	context.subscriptions.push(vscode.commands.registerCommand('serialport.connectOrDisconect', command.connectOrDisconect));
 	context.subscriptions.push(vscode.commands.registerCommand('serialport.sendEntry', command.sendEntry));
+	context.subscriptions.push(vscode.commands.registerCommand('serialport.updateEntry', command.updateEntry));
 
 	const SerialPortsProvider = new SerialPortProvider();
 	vscode.window.registerTreeDataProvider('serialport', SerialPortsProvider);
