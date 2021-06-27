@@ -19,7 +19,6 @@
         "IC"
     ],
 	"activationEvents": [
-		"onCommand:serialport.helloWorld",
 		"onView:serialport"
 	],
     "publisher": "hancel",
@@ -30,12 +29,9 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "serialport.helloWorld",
-				"title": "Hello World"
-			},
-			{
 				"command": "serialport.refreshEntry",
-				"title": "Refresh",
+                "category": "Serial Port",
+				"title": "%command.refresh%",
 				"icon": {
 					"light": "resources/light/refresh.svg",
 					"dark": "resources/dark/refresh.svg"
@@ -43,7 +39,7 @@
 			},
 			{
 				"command": "serialport.sendEntry",
-				"title": "Send",
+				"title": "%command.send%",
 				"icon": {
 					"light": "resources/light/send.svg",
 					"dark": "resources/dark/send.svg"
@@ -54,7 +50,7 @@
 			"activitybar": [
 				{
 					"id": "serialport-view",
-					"title": "Serial Port View",
+					"title": "%view.title%",
 					"icon": "media/serial-port.svg"
 				}
 			]
@@ -63,7 +59,7 @@
 			"serialport-view": [
 				{
 					"id": "serialport",
-					"name": "List",
+					"name": "%view.subtitle%",
 					"icon": "media/serial-port.svg"
 				}
 			]
@@ -81,6 +77,12 @@
 					"command": "serialport.sendEntry",
 					"when": "view == serialport && viewItem == serialport-item",
 					"group": "inline"
+				}
+			],
+			"commandPalette": [
+				{
+					"command": "serialport.sendEntry",
+					"when": "false"
 				}
 			]
 		}

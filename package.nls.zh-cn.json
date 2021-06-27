@@ -1,0 +1,6 @@
+{
+    "command.refresh": "刷新串口列表",
+    "command.send": "发送",
+    "view.title": "串口视图",
+    "view.subtitle": "列表"
+}

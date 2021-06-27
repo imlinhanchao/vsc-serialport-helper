@@ -1,0 +1,6 @@
+{
+    "command.refresh": "Refresh Serial Port List",
+    "command.send": "Send",
+    "view.title": "Serial Port View",
+    "view.subtitle": "List"
+}

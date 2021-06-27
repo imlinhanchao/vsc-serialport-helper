@@ -1,0 +1,16 @@
+{
+    "baudRate": "Baud Rate",
+    "dataBits": "Data Bits",
+    "stopBits": "Stop Bits",
+    "parity": "Parity",
+    "serialport": "Serial Port",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "manufacturer": "Manufacturer",
+    "serialnumber": "SerialNumber",
+    "click_update": "Click to update the option",
+    "send_success": "Send Data to {{path}} was Success.",
+    "update_title": "Set {{path}} option {{attr}}",
+    "send_title": "Send String to {{path}}",
+    "click_to": "Click to"
+}

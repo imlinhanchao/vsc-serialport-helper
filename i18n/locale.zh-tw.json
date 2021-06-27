@@ -1,0 +1,16 @@
+{
+    "baudRate": "波特率",
+    "dataBits": "數據位",
+    "stopBits": "停止位",
+    "parity": "校驗位",
+    "serialport": "串口",
+    "connect": "連接",
+    "disconnect": "斷開",
+    "manufacturer": "製造商",
+    "serialnumber": "序列號",
+    "click_update": "單擊更新",
+    "send_success": "成功將數據發送到{{path}}。",
+    "update_title": "設置 {{path}} 屬性 {{attr}}",
+    "send_title": "發送字符串到{{path}}",
+    "click_to": "單擊"
+}

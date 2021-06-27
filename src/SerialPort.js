@@ -1,13 +1,15 @@
 const vscode = require('vscode');
 const SerialPort = require('../lib/serialport');
 const path = require('path');
+const locale = require('../i18n')();
 
 
 class SerialPortProvider {
-	constructor() {
+	constructor(context) {
 		this._onDidChangeTreeData = new vscode.EventEmitter();
 		this.refreshPort();
 		this.ports = [];
+		this.context = context;
 	}
 
 	get onDidChangeTreeData() {
@@ -20,7 +22,8 @@ class SerialPortProvider {
 		let portNew = ports.filter(p => paths.indexOf(p.path) < 0);
 		paths = ports.map(p => p.path);
 		this.ports = this.ports.filter(p => paths.indexOf(p.path) >= 0);
-		this.ports = this.ports.concat(portNew.map(p => new SerialPortItem(p, vscode.TreeItemCollapsibleState.Collapsed, () => {
+		this.ports = this.ports.concat(portNew.map(p => new SerialPortItem(p, this.context,
+			vscode.TreeItemCollapsibleState.Collapsed, () => {
 			this._onDidChangeTreeData.fire();
 		})))
 	}
@@ -54,11 +57,12 @@ class SerialPortProvider {
 class SerialPortItem extends vscode.TreeItem {
 	constructor(
 		port,
+		context,
 		collapsibleState,
 		changeEvent
 	) {
 		super(port.path, collapsibleState);
-        
+        this.context = context;
         this.contextValue = 'serialport-item';
         this.command= {
 			command: 'serialport.connectOrDisconect',
@@ -67,7 +71,7 @@ class SerialPortItem extends vscode.TreeItem {
 		};
 		this.info = port;
 		this.changeEvent = changeEvent;
-		this.initPort(port.path, {
+		this.initPort(port.path, this.context.globalState.get(`serialport.${port.path}`) || {
 			baudRate: 9600,
 			dataBits: 8,
 			stopBits: 1,
@@ -86,9 +90,11 @@ class SerialPortItem extends vscode.TreeItem {
 		});
 		this.port.onListen((err, data) => {
 			if(!err) this.outputData(data);
-			else vscode.window.showErrorMessage(`Serial Port [${port.path}] get some error: ${err.message}`)
+			else vscode.window.showErrorMessage(`Serial Port [${path}] get some error: ${err.message}`)
 		});
 		if (isOpen) this.port.open();
+
+		this.context.globalState.update(`serialport.${path}`, this.options);
 	}
 
 	outputData(data) {
@@ -97,7 +103,7 @@ class SerialPortItem extends vscode.TreeItem {
 	}
 
 	open() {
-		this.outputChannel = vscode.window.createOutputChannel(`Serial Port [${this.path}]`);
+		this.outputChannel = vscode.window.createOutputChannel(`${locale['serialport']} [${this.path}]`);
 		return this.port.open();
 	}
 
@@ -128,13 +134,13 @@ class SerialPortItem extends vscode.TreeItem {
 	get tooltip() {
 		return `VID:  ${this.info.vendorId}
 PID:  ${this.info.productId}
-Manufacturer: ${this.info.manufacturer}
-SerialNumber: ${this.info.serialNumber}
-* Click to ${this.port.isOpen ? 'Disconnect' : 'Connect'}`;
+${locale['manufacturer']}: ${this.info.manufacturer}
+${locale['serialNumber']}: ${this.info.serialNumber}
+* ${locale['click_to']} ${this.port.isOpen ? locale['disconnect'] : locale['connect']}`;
 	}
 
 	get description() {
-		return `[${this.port.isOpen ? 'Connected' : 'Disconnected'}]`;
+		return `[${this.port.isOpen ? locale['connect'] : locale['disconnect']}]`;
 	}
 
 	get iconPath() {
@@ -142,7 +148,7 @@ SerialNumber: ${this.info.serialNumber}
     }
 
 	get lasterror() {
-		return this.port.lasterror.message;
+		return this.port.lasterror && this.port.lasterror.message;
 	}
 }
 
@@ -153,7 +159,7 @@ class SerialPortAttr extends vscode.TreeItem {
 		collapsibleState,
 		changeEvent
 	) {
-		super(attr, collapsibleState);
+		super(locale[attr], collapsibleState);
         this.contextValue = 'serialport-attr';
         this.command= {
 			command: 'serialport.updateEntry',
@@ -166,7 +172,7 @@ class SerialPortAttr extends vscode.TreeItem {
 	}
 
 	get tooltip() {
-		return `Click to Update`;
+		return locale['click_update'];
 	}
 
 	get description() {
