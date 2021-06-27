@@ -132,6 +132,7 @@ class SerialPortItem extends vscode.TreeItem {
 	}
 
 	get tooltip() {
+		if (!this.info.vendorId) return null;
 		return `VID:  ${this.info.vendorId}
 PID:  ${this.info.productId}
 ${locale['manufacturer']}: ${this.info.manufacturer}

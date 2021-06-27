@@ -13,6 +13,12 @@ You can connect any serial port used to read / write data.
    ![](media/RX.png)
 
 ## Release Notes
+
+### 0.0.2
+- Add support Chinese.
+- Add options list in config serial port.
+- Add remember last serial port config.
+
 ### 0.0.1
 
 - First Version, only baise feature.
