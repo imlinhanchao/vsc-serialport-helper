@@ -11,6 +11,8 @@
     "click_update": "Click to update the option",
     "send_success": "Send Data to {{path}} was Success.",
     "update_title": "Set {{path}} option {{attr}}",
-    "send_title": "Send String to {{path}}",
+    "send_title": "Send String to {{path}}. You can input `@file` to send a file or `@hex` to send by hex buffer.",
+    "send_hex_title": "Send Hex to {{path}}. Please separate each byte with a space as `40 48 61 6e 63 65 6c`.",
+    "not_invalid_hex": "It's a invalid buffer string. Please separate each byte with a space as `40 48 61 6e 63 65 6c`.",
     "click_to": "Click to"
 }
