@@ -3,7 +3,7 @@ const locale = require('../i18n')();
 const fs = require('fs');
 
 let attrOptions = {
-	baudRate: [115200, 57600, 38400, 19200, 9600, 4800, 2400, 1800, 1200, 600, 300, 200, 150, 134, 110, 75, 50],
+	baudRate: [115200, 57600, 38400, 19200, 9600, 4800, 2400, 1800, 1200, 600, 300, 200, 150, 134, 110, 75, 50, 'DIY'],
 	dataBits: [8, 7, 6, 5],
 	stopBits: [1, 2],
 	parity: ['none', 'even', 'mark', 'odd', 'space']
@@ -55,6 +55,12 @@ module.exports = {
 		data = await vscode.window.showQuickPick(attrOptions[attr].map(a => ({ label: a.toString() })), 
 			{ title: locale['update_title'].replace(/{{path}}/, port.path).replace(/{{attr}}/, locale[attr]) });
 		if (!data) return;
+		if (data.label == 'DIY') data.label = await vscode.window.showInputBox({ 
+			prompt: locale['update_title'].replace(/{{path}}/, port.path).replace(/{{attr}}/, locale[attr]),
+			validateInput(value) {
+				return !isNaN(value) ? null : `${value} ${locale['is_not_number']}`;
+			}
+		});
 		data = attr != 'parity' ? parseInt(data.label) : data.label;
 		let ret = true;
 		await port.setting({ [attr]: data });

@@ -14,5 +14,6 @@
     "send_title": "发送字符串到{{path}}。你可以输入`@file`来发送文件，或`@hex`来发送字节。",
     "send_hex_title": "将十六进制 Buffer 发送到{{path}}。请将每个字节用空格隔开, 就像 `40 48 61 6e 63 65 6c`.",
     "not_invalid_hex": "这不是有效的 Buffer 字符串。请将每个字节用空格隔开， 就像`40 48 61 6e 63 65 6c`.",
+    "is_not_number": "不是一个数字。",
     "click_to": "单击"
 }

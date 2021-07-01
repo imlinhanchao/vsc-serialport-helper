@@ -2,6 +2,9 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.5] - 2021-07-01
+- Support DIY Baud Rate.
+
 ## [0.0.4] - 2021-07-01
 - Update preview image size in readme.
 
