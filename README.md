@@ -16,6 +16,9 @@ You can connect any serial port used to read / write data.
 
 ## Release Notes
 
+### 0.0.4
+- Update preview image size in readme.
+
 ### 0.0.3
 - Add send hex buffer command.
 - Add send file command
