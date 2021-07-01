@@ -11,8 +11,14 @@ You can connect any serial port used to read / write data.
 3. TX / RX;
    ![](media/TX.png)
    ![](media/RX.png)
+4. Send Hex Buffer: Press send button, and then input `@hex` or `@hex:<your buffer byte>` to send Hex Buffer;
+5. Send File: Press send button, and then input `@file` or `@file:<your file path>` to send file.
 
 ## Release Notes
+
+### 0.0.3
+- Add send hex buffer command.
+- Add send file command
 
 ### 0.0.2
 - Add support Chinese.

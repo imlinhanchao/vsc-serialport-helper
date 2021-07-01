@@ -2,6 +2,10 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.3] - 2021-07-01
+- Add send hex buffer command.
+- Add send file command
+
 ## [0.0.2] - 2021-06-27
 - Add support Chinese.
 - Add options list in config serial port.
