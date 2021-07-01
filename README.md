@@ -4,15 +4,15 @@ You can connect any serial port used to read / write data.
 
 ## Features
 
-1. Serial Port View;
+1. Serial Port View;  
    ![](media/View.png)
-2. Serial Port Config;
+2. Serial Port Config;  
    ![](media/Config.png)
-3. TX / RX;
+3. TX / RX;  
    ![](media/TX.png)
    ![](media/RX.png)
-4. Send Hex Buffer: Press send button, and then input `@hex` or `@hex:<your buffer byte>` to send Hex Buffer;
-5. Send File: Press send button, and then input `@file` or `@file:<your file path>` to send file.
+4. Send Hex Buffer: Press send button, and then input `@hex` or `@hex:<your buffer byte>` to send Hex Buffer;  
+5. Send File: Press send button, and then input `@file` or `@file:<your file path>` to send file.  
 
 ## Release Notes
 
