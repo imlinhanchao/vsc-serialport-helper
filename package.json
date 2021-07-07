@@ -2,7 +2,7 @@
 	"name": "serialport-helper",
 	"displayName": "Serial Port Helper",
 	"description": "Serial Port Debug Tool",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"engines": {
 		"vscode": "^1.40.0"
 	},
@@ -85,6 +85,16 @@
 					"when": "false"
 				}
 			]
+		},
+		"configuration": {
+            "title": "Serial Port Helper",
+            "properties": {
+                "serialPort.enableEscapeCharacte": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "%enableEscapeCharacte.description%"
+                }
+			}
 		}
 	},
 	"scripts": {

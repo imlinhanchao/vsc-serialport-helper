@@ -38,6 +38,10 @@ async function getSendData(data, path) {
 		return Buffer.from(data);
 	}
 
+	if (vscode.workspace.getConfiguration().get('serialPort.enableEscapeCharacte')) {
+		try { data = JSON.parse(`\"${data.replace(/"/g, `\\"`)}\"`); } catch(ex) {}
+	}
+
 	return data;
 }
 
@@ -52,6 +56,7 @@ module.exports = {
 
 	async updateEntry(port, attr) {
 		let data = port.options[attr];
+		vscode.window.createQuickPick
 		data = await vscode.window.showQuickPick(attrOptions[attr].map(a => ({ label: a.toString() })), 
 			{ title: locale['update_title'].replace(/{{path}}/, port.path).replace(/{{attr}}/, locale[attr]) });
 		if (!data) return;

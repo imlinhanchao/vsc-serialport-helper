@@ -15,6 +15,8 @@ You can connect any serial port used to read / write data.
 5. Send File: Press send button, and then input `@file` or `@file:<your file path>` to send file.  
 
 ## Release Notes
+### 0.0.6
+- Added option `serialPort.enableEscapeCharacte` and support to send escape characte.
 
 ### 0.0.5
 - Support DIY Baud Rate.

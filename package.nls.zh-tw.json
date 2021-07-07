@@ -2,5 +2,6 @@
     "command.refresh": "刷新串口列表",
     "command.send": "發送",
     "view.title": "串口視圖",
-    "view.subtitle": "列表"
+    "view.subtitle": "列表",
+    "enableEscapeCharacte.description": "發送字符串時啟用轉義字符。"
 }

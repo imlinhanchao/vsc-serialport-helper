@@ -2,6 +2,9 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.6] - 2021-07-07
+- Added option `serialPort.enableEscapeCharacte` and support to send escape characte.
+
 ## [0.0.5] - 2021-07-01
 - Support DIY Baud Rate.
 
