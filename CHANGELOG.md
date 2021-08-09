@@ -2,6 +2,9 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.7] - 2021-08-09
+- Update to support VSCode `1.59.0` on Windows OS(Mac and Linux not support yet).
+
 ## [0.0.6] - 2021-07-07
 - Added option `serialPort.enableEscapeCharacte` and support to send escape characte.
 
