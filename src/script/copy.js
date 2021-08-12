@@ -9,7 +9,7 @@ async function main() {
         let srcfile = path.join(__dirname, 'node', n);
         let destfile = path.join(__dirname, '../../node_modules/node-usb-native/lib/native', n);
         console.info(`copy file ${srcfile} to ${destfile}`);
-        if(fs.existsSync()) 
+        if(!fs.existsSync(destfile)) 
             fs.copyFileSync(srcfile, destfile, fs.constants.COPYFILE_EXCL)
     });
 }
