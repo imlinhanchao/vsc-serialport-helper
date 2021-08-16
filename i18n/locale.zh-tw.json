@@ -15,5 +15,8 @@
     "send_hex_title": "將十六進制 Buffer 發送到{{path}}。請將每個字節用空格隔開, 就像 `40 48 61 6e 63 65 6c`.",
     "not_invalid_hex": "這不是有效的 Buffer 字符串。請將每個字節用空格隔開， 就像`40 48 61 6e 63 65 6c`.",
     "is_not_number": "不是一個數字。",
-    "click_to": "單擊"
+    "click_to": "單擊",
+    "view_mode": "顯示模式",
+    "string_mode": "字符模式",
+    "hex_mode": "Hex 模式"
 }

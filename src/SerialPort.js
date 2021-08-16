@@ -42,7 +42,7 @@ class SerialPortProvider {
 			return await this.getSerialPortList();
 		} else {
 			console.dir(element);
-			return ['baudRate', 'dataBits', 'stopBits', 'parity'].map(a => new SerialPortAttr(element, a, 
+			return ['baudRate', 'dataBits', 'stopBits', 'parity', 'view_mode'].map(a => new SerialPortAttr(element, a, 
 				vscode.TreeItemCollapsibleState.None, () => {
 				this._onDidChangeTreeData.fire();
 			}))
@@ -75,7 +75,8 @@ class SerialPortItem extends vscode.TreeItem {
 			baudRate: 9600,
 			dataBits: 8,
 			stopBits: 1,
-			parity: 'none'
+			parity: 'none',
+			view_mode: true
 		});
 	}
 
@@ -99,7 +100,8 @@ class SerialPortItem extends vscode.TreeItem {
 
 	outputData(data) {
 		if (!this.port.isOpen) return;
-		this.outputChannel.append(data.toString());
+		if(!this.options.view_mode) this.outputChannel.append(data.toString());
+		else this.outputChannel.append(Array.from(Buffer.from(data, 'utf8')).map(d => ('0' + d.toString(16)).slice(-2)).join(' ') + ' ');
 	}
 
 	open() {
@@ -177,6 +179,7 @@ class SerialPortAttr extends vscode.TreeItem {
 	}
 
 	get description() {
+		if (this.attr == 'view_mode') return !this.port.options[this.attr] ? locale['string_mode'] : locale['hex_mode'];
 		return this.port.options[this.attr].toString();
 	}
 

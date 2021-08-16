@@ -55,8 +55,12 @@ module.exports = {
     },
 
 	async updateEntry(port, attr) {
+		if (attr == 'view_mode') {
+			port.options[attr] = !port.options[attr]
+			await port.setting({ [attr]: port.options[attr] });
+			return;
+		}
 		let data = port.options[attr];
-		vscode.window.createQuickPick
 		data = await vscode.window.showQuickPick(attrOptions[attr].map(a => ({ label: a.toString() })), 
 			{ title: locale['update_title'].replace(/{{path}}/, port.path).replace(/{{attr}}/, locale[attr]) });
 		if (!data) return;

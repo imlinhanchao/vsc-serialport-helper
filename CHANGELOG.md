@@ -2,6 +2,9 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.9] - 2021-08-16
+- Support Hex View on RX.
+
 ## [0.0.8] - 2021-08-12
 - Update to support VSCode `1.59.0` on Mac OS(Linux not support yet).
 

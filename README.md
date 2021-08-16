@@ -14,7 +14,18 @@ You can connect any serial port used to read / write data.
 4. Send Hex Buffer: Press send button, and then input `@hex` or `@hex:<your buffer byte>` to send Hex Buffer;  
 5. Send File: Press send button, and then input `@file` or `@file:<your file path>` to send file.  
 
+## Notice
+If you use hex view on RX. It will be output in one line. You can paste this config text in setting.json to make it word wrap.
+```json
+"[Log]": {
+    "editor.wordWrap": "on"
+}
+```
+
 ## Release Notes
+### 0.0.9
+- Support Hex View on RX.
+
 ### 0.0.8
 - Update to support VSCode `1.59.0` on Mac OS(Linux not support yet).
 
