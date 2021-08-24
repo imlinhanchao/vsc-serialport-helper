@@ -23,6 +23,9 @@ If you use hex view on RX. It will be output in one line. You can paste this con
 ```
 
 ## Release Notes
+### 0.0.10
+- Fixed send button disappears.
+
 ### 0.0.9
 - Support Hex View on RX.
 

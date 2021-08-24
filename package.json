@@ -2,7 +2,7 @@
 	"name": "serialport-helper",
 	"displayName": "Serial Port Helper",
 	"description": "Serial Port Debug Tool",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"engines": {
 		"vscode": "^1.40.0"
 	},
@@ -75,7 +75,7 @@
 			"view/item/context": [
 				{
 					"command": "serialport.sendEntry",
-					"when": "view == serialport && viewItem == serialport-item && serialport.isConnect",
+					"when": "view == serialport && viewItem == serialport-item",
 					"group": "inline"
 				}
 			],

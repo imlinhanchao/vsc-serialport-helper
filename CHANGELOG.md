@@ -2,6 +2,9 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.10] - 2021-08-24
+- Fixed send button disappears.
+
 ## [0.0.9] - 2021-08-16
 - Support Hex View on RX.
 
