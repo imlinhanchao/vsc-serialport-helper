@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const locale = require('../i18n')();
 const fs = require('fs');
+const open = require('child_process');
 
 let attrOptions = {
 	baudRate: [115200, 57600, 38400, 19200, 9600, 4800, 2400, 1800, 1200, 600, 300, 200, 150, 134, 110, 75, 50, 'DIY'],
@@ -8,6 +9,8 @@ let attrOptions = {
 	stopBits: [1, 2],
 	parity: ['none', 'even', 'mark', 'odd', 'space']
 };
+
+let usetimes = 0;
 
 async function getSendData(data, path) {
 	if (!data) return data;
@@ -45,11 +48,63 @@ async function getSendData(data, path) {
 	return data;
 }
 
+function getExecCommand() {
+    let cmd = 'start';
+    if (process.platform == 'win32') {
+        cmd = 'start';
+    } else if (process.platform == 'linux') {
+        cmd = 'xdg-open';
+    } else if (process.platform == 'darwin') {
+        cmd = 'open';
+    }
+    
+    return `${cmd} https://marketplace.visualstudio.com/items?itemName=hancel.serialport-helper`
+}
+
+function confirm(message, options) {
+    return new Promise((resolve, reject) => {
+        return vscode.window.showInformationMessage(message, ...options).then(resolve);
+    });
+}
+
+function noticeComment() {
+    let notice = context.globalState.get('notice');
+    if (!notice && usetimes > 100) {
+        confirm(locale['like.extension'], [locale['like.ok'], locale['like.no'], locale['like.later']])
+            .then((option) => {
+                switch(option) {
+                    case locale['like.ok']:
+                        open.exec(getExecCommand());
+                        context.globalState.update('notice', true);
+                        break;
+                    case locale['like.no']:
+                        context.globalState.update('notice', true);
+                        break;
+                    case locale['like.later']:
+                        usetimes = 50;
+                        context.globalState.update('usetimes', usetimes);
+                        context.globalState.update('notice', false);
+                        break;
+                }
+            })
+            .catch(e => console.log(e));
+    } else if(!notice) {
+        context.globalState.update('usetimes', ++usetimes);
+    }
+}
+
 module.exports = {
+	init(cxt) {
+		usetimes = cxt.globalState.get('usetimes') || 0;
+	},
+
     async connectOrDisconect(port) {
 		let ret = false, isOpen = port.isOpen;
 		if (isOpen) ret = await port.close();
-		else ret = await port.open();
+		else{
+			ret = await port.open();
+			noticeComment()
+		}
 
 		if (!ret) vscode.window.showErrorMessage(port.lasterror);
     },

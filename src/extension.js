@@ -16,6 +16,8 @@ function activate(context) {
 	// This line of code will only be executed once when your extension is activated
 	console.debug('Congratulations, your extension "serialport-helper" is now active!');
 
+	command.init(context);
+
 	context.subscriptions.push(vscode.commands.registerCommand('serialport.connectOrDisconect', command.connectOrDisconect));
 	context.subscriptions.push(vscode.commands.registerCommand('serialport.sendEntry', command.sendEntry));
 	context.subscriptions.push(vscode.commands.registerCommand('serialport.updateEntry', command.updateEntry));
