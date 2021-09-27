@@ -23,6 +23,9 @@ If you use hex view on RX. It will be output in one line. You can paste this con
 ```
 
 ## Release Notes
+### 0.0.12
+- Added support to set keybinding to send data.
+
 ### 0.0.11
 - Added notice to comment extenion on market.
 

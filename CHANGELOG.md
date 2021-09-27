@@ -2,6 +2,12 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.12] - 2021-08-24
+- Added support to set keybinding to send data.
+- 
+## [0.0.11] - 2021-08-25
+- Added notice to comment extenion on market.
+
 ## [0.0.10] - 2021-08-24
 - Fixed send button disappears.
 

@@ -71,7 +71,7 @@ function confirm(message, options) {
 
 function noticeComment() {
     let notice = context.globalState.get('notice');
-    if (!notice && usetimes > 100) {
+    if (!notice && usetimes > 80) {
         confirm(locale['like.extension'], [locale['like.ok'], locale['like.no'], locale['like.later']])
             .then((option) => {
                 switch(option) {
