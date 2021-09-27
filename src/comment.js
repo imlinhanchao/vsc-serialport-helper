@@ -12,6 +12,8 @@ let attrOptions = {
 
 let usetimes = 0;
 
+let ports = {};
+
 async function getSendData(data, path) {
 	if (!data) return data;
 	// send file
@@ -103,6 +105,7 @@ module.exports = {
 		if (isOpen) ret = await port.close();
 		else{
 			ret = await port.open();
+			ports[port.path] = port;
 			noticeComment()
 		}
 
@@ -134,6 +137,13 @@ module.exports = {
 	},
 
 	async sendEntry(port) {
+		if (typeof port == 'string') {
+			if (ports[port] === undefined) {
+				vscode.window.showWarningMessage(`${port} was not found or not connected yet.`);
+				return;
+			}
+			port = ports[port];
+		}
 		let data = await vscode.window.showInputBox({ prompt: locale['send_title'].replace(/{{path}}/, port.path) });
 		data = await getSendData(data, port.path);
 		if (!data) return;
