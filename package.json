@@ -2,7 +2,7 @@
 	"name": "serialport-helper",
 	"displayName": "Serial Port Helper",
 	"description": "Serial Port Debug Tool",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"engines": {
 		"vscode": "^1.40.0"
 	},
