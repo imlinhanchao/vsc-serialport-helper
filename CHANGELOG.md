@@ -2,9 +2,11 @@
 
 All notable changes to the "serialport-helper" extension will be documented in this file.
 
+## [0.0.15] - 2022-04-07
+- Support Last Version VSCode in Windows
+
 ## [0.0.14] - 2022-04-07
 - Added Init Fail Message.
-- Support Last Version VSCode in Windows
 
 ## [0.0.13] - 2021-11-30
 - Added to support Mac M1.
