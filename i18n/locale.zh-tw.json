@@ -18,5 +18,6 @@
     "click_to": "單擊",
     "view_mode": "顯示模式",
     "string_mode": "字符模式",
-    "hex_mode": "Hex 模式"
+    "hex_mode": "Hex 模式",
+    "init_fail": "初始化扩展失败, 您需要重建扩展, 可以在这里找到[重建方法](https://github.com/imlinhanchao/vsc-serialport-helper/wiki/How-To-Build-SerialPort-Node-module). 或是给我们发 [Issue](https://github.com/imlinhanchao/vsc-serialport-helper/issues/), 提供您的版本信息，等待更新。"
 }

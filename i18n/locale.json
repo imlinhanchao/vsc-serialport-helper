@@ -18,5 +18,6 @@
     "click_to": "Click to",
     "view_mode": "View Mode",
     "string_mode": "String Mode",
-    "hex_mode": "Hex Mode"
+    "hex_mode": "Hex Mode",
+    "init_fail": "Initialization extension failed, you need to rebuild the extension, check it [here](https://github.com/imlinhanchao/vsc-serialport-helper/wiki/How-To-Build-SerialPort-Node-module). Or you can feedback [Issue](https://github.com/imlinhanchao/vsc-serialport-helper/issues/), provide your version information waiting to be updated."
 }
