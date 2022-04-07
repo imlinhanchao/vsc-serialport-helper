@@ -23,6 +23,10 @@ If you use hex view on RX. It will be output in one line. You can paste this con
 ```
 
 ## Release Notes
+### 0.0.14
+- Added Init Fail Message.
+- Support Last Version VSCode in Windows
+
 ### 0.0.13
 - Added to support Mac M1.
 
