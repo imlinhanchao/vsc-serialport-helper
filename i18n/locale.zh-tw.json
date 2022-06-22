@@ -19,5 +19,5 @@
     "view_mode": "檢視模式",
     "string_mode": "字串模式",
     "hex_mode": "十六進制模式",
-    "init_fail": "初始化擴展模組失敗, 您需要重建擴展模組, 可以由此找到 [重建方法](https://github.com/imlinhanchao/vsc-serialport-helper/wiki/How-To-Build-SerialPort-Node-module)。 或是發送 [Issue](https://github.com/imlinhanchao/vsc-serialport-helper/issues/) 給我們, 並提供您使用的版本資料與問題的相關描述資訊, 以利我們更容易找到解決辦法，謝謝。"
+    "init_fail": "初始化延伸模組失敗, 您需要重建延伸模組, 可以由此找到 [重建方法](https://github.com/imlinhanchao/vsc-serialport-helper/wiki/How-To-Build-SerialPort-Node-module)。 或是發送 [Issue](https://github.com/imlinhanchao/vsc-serialport-helper/issues/) 給我們, 並提供您使用的版本資料與問題的相關描述資訊, 以利我們更容易找到解決辦法，謝謝。"
 }
